@@ -19,8 +19,5 @@ public class DevDto {
     Integer age;
     LocalDateTime startAT;
 
-    public void printLog(){
-        log.info(getName());
-    }
 
 }
