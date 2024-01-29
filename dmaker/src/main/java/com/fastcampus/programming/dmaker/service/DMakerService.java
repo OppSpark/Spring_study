@@ -6,10 +6,7 @@ import com.fastcampus.programming.dmaker.exception.DMakerErrorCode;
 import com.fastcampus.programming.dmaker.exception.DMakerException;
 import com.fastcampus.programming.dmaker.repository.DeveloperRepository;
 import com.fastcampus.programming.dmaker.type.DeveloperLevel;
-import com.fastcampus.programming.dmaker.type.DeveloperSkillType;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,22 +23,21 @@ public class DMakerService {
     private final EntityManager em;
 
     @Transactional
-    public void createDevelopers(CreateDeveloper.Request request) {
-        EntityTransaction transaction = em.getTransaction();
+    public CreateDeveloper.Response createDeveloper (CreateDeveloper.Request request) {
         validateCreateDeveloperRequest(request);
 
         //비즈니스 로직 시작
         Developer developer = Developer.builder()
-                .developerLevel(DeveloperLevel.JUNIOR)
-                .developerSkillType(DeveloperSkillType.FRONT_END)
-                .experienceYears(2)
-                .name("Olaf")
-                .age(5)
+                .developerLevel(request.getDeveloperLevel())
+                .developerSkillType(request.getDeveloperSkillType())
+                .experienceYears(request.getExperienceYear())
+                .memberId(request.getMemberId())
+                .name(request.getName())
+                .age(request.getAge())
                 .build();
 
         developerRepository.save(developer);
-
-        transaction.commit();
+        return CreateDeveloper.Response.fromEntity(developer);
     }
 
     private void validateCreateDeveloperRequest(CreateDeveloper.Request request) {
@@ -51,10 +47,7 @@ public class DMakerService {
         /**
          * DeveloperLevel 에서 시니어의 경우 10년차 이상이여한다.
          * 10년차 이하인 경우 예최처리 방법 예시이다.
-         *
          * 주니어 개발자의 경우 3년에서 10년 사이
-         * 예시
-         *
          */
         DeveloperLevel developerLevel = request.getDeveloperLevel();
         Integer experienceYear = request.getExperienceYear();

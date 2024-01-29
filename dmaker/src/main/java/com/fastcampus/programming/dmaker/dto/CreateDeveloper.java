@@ -19,7 +19,7 @@ public class CreateDeveloper {
     @NoArgsConstructor
     @Builder
     @ToString
-    public static class Request{
+    public static class Request {
         @NotNull
         private DeveloperLevel developerLevel;
         @NotNull
@@ -30,10 +30,10 @@ public class CreateDeveloper {
         private Integer experienceYear;
 
         @NotNull
-        @Size(min = 3, max= 50, message = "memberId size muse 3 ~ 50")
+        @Size(min = 3, max = 50, message = "memberId size muse 3 ~ 50")
         private String memberId;
         @NotNull
-        @Size(min = 3, max= 20, message = "memberId size muse 3 ~ 20")
+        @Size(min = 3, max = 20, message = "memberId size muse 3 ~ 20")
         private String name;
 
         @Min(18)
@@ -46,11 +46,19 @@ public class CreateDeveloper {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    public static class Response{
+    public static class Response {
         private DeveloperLevel developerLevel;
         private DeveloperSkillType developerSkillType;
         private Integer experienceYear;
-
         private String memberId;
+
+        public static Response fromEntity(Developer developer) {
+            return Response.builder()
+                    .developerLevel(developer.getDeveloperLevel())
+                    .developerSkillType(developer.getDeveloperSkillType())
+                    .experienceYear(developer.getExperienceYears())
+                    .memberId(developer.getMemberId())
+                    .build();
+        }
     }
 }
