@@ -51,6 +51,8 @@ public class CreateDeveloper {
         private DeveloperSkillType developerSkillType;
         private Integer experienceYear;
         private String memberId;
+        private String name;
+        private Integer age;
 
         public static Response fromEntity(Developer developer) {
             return Response.builder()
@@ -58,6 +60,8 @@ public class CreateDeveloper {
                     .developerSkillType(developer.getDeveloperSkillType())
                     .experienceYear(developer.getExperienceYears())
                     .memberId(developer.getMemberId())
+                    .name(developer.getName())
+                    .age(developer.getAge())
                     .build();
         }
     }
