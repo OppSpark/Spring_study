@@ -1,6 +1,8 @@
 package com.fastcampus.programming.dmaker.service;
 
 import com.fastcampus.programming.dmaker.dto.CreateDeveloper;
+import com.fastcampus.programming.dmaker.dto.DeveloperDetailDto;
+import com.fastcampus.programming.dmaker.dto.DeveloperDto;
 import com.fastcampus.programming.dmaker.entity.Developer;
 import com.fastcampus.programming.dmaker.exception.DMakerErrorCode;
 import com.fastcampus.programming.dmaker.exception.DMakerException;
@@ -11,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author oppspark
@@ -64,18 +67,27 @@ public class DMakerService {
                 && experienceYear > 4) {
             throw new DMakerException(DMakerErrorCode.LEVEL_EXPERIENCE_YEARS_NOT_MATCHED);
         }
-
-
         //주석 처리한 문장을 람다 표현식으로 간단하게 처리 가능함
         developerRepository.findByMemberId(request.getMemberId())
                 .ifPresent((developer1 -> {
                     throw new DMakerException(DMakerErrorCode.DUPLICATED_MEMBER_ID);
                 }));
-
         /*
         Optional<Developer> developer = developerRepository.findByMemberId(request.getMemberId());
         if(developer.isPresent())
             throw new DMakerException(DMakerErrorCode.DUPLICATED_MEMBER_ID);
         */
+    }
+
+    public List<DeveloperDto> getALLDevelopers() {
+        return developerRepository.findAll()
+                .stream().map(DeveloperDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public DeveloperDetailDto getALLDevelopersDetail(String memberId) {
+        return developerRepository.findByMemberId(memberId)
+                .map(DeveloperDetailDto::fromEntity)
+                .orElseThrow(() -> new DMakerException(DMakerErrorCode.NO_DEVELOPER));
     }
 }
