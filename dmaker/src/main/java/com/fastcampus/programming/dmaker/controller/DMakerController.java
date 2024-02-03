@@ -3,6 +3,7 @@ package com.fastcampus.programming.dmaker.controller;
 import com.fastcampus.programming.dmaker.dto.CreateDeveloper;
 import com.fastcampus.programming.dmaker.dto.DeveloperDetailDto;
 import com.fastcampus.programming.dmaker.dto.DeveloperDto;
+import com.fastcampus.programming.dmaker.dto.EditDeveloper;
 import com.fastcampus.programming.dmaker.entity.Developer;
 import com.fastcampus.programming.dmaker.service.DMakerService;
 import jakarta.validation.Valid;
@@ -33,12 +34,10 @@ public class DMakerController {
 
     @GetMapping("/developer/{memberId}")
     public DeveloperDetailDto getDeveloperDetail(
-        @PathVariable String memberId)
-    {
+            @PathVariable String memberId) {
         log.info("GET /developers HTTP/1.1");
-
-        return  dMakerService.getALLDevelopersDetail(memberId);
-        }
+        return dMakerService.getALLDevelopersDetail(memberId);
+    }
 
     @PostMapping("/create-developer")
     public CreateDeveloper.Response createDevelopers(
@@ -46,7 +45,15 @@ public class DMakerController {
             @RequestBody CreateDeveloper.Request request
     ) {
         log.info("request :{}", request);
-
         return dMakerService.createDeveloper(request);
     }
+
+    @PutMapping("/developer/{memberId}")
+    public DeveloperDetailDto editDeveloper(
+            @PathVariable String memberId,
+            @Valid@RequestBody EditDeveloper.Request request) {
+        log.info("Put /developers HTTP/1.1");
+        return dMakerService.editDeveloper(memberId, request);
+    }
+
 }
