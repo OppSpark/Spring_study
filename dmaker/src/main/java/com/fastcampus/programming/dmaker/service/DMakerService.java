@@ -132,7 +132,7 @@ public class DMakerService {
         developer.setStatusCode(StatusCode.RETIRED);
 
 
-        if(developer != null) throw new DMakerException(DMakerErrorCode.NO_DEVELOPER)
+        if(developer != null) throw new DMakerException(DMakerErrorCode.NO_DEVELOPER);
 
         RetiredDeveloper retiredDeveloper = RetiredDeveloper.builder()
                 .memberId(memberId)
