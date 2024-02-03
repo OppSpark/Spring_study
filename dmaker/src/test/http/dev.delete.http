@@ -1,0 +1,11 @@
+DELETE http://localhost:8080/developer/Mini2
+Content-Type: application/json
+
+{
+  "developerLevel": "SENIOR",
+  "developerSkillType": "BACK_END",
+  "experienceYear": 11,
+  "memberId": "Mini2",
+  "name": "ssS",
+  "age": 24
+}
