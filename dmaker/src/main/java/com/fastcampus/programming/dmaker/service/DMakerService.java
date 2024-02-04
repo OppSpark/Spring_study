@@ -48,16 +48,7 @@ public class DMakerService {
     }
 
     private void validateCreateDeveloperRequest(CreateDeveloper.Request request) {
-        //  비즈니스 벨리데이션 수행 로직
-
-        // 예외 처리 예시
-        /**
-         * DeveloperLevel 에서 시니어의 경우 10년차 이상이여한다.
-         * 10년차 이하인 경우 예최처리 방법 예시이다.
-         * 주니어 개발자의 경우 3년에서 10년 사이
-         */
         validateDeveloperLevel(request.getDeveloperLevel(), request.getExperienceYear());
-
 
         //주석 처리한 문장을 람다 표현식으로 간단하게 처리 가능함
         developerRepository.findByMemberId(request.getMemberId())
@@ -130,9 +121,6 @@ public class DMakerService {
                 .orElseThrow(() -> new DMakerException((DMakerErrorCode.NO_DEVELOPER)));
 
         developer.setStatusCode(StatusCode.RETIRED);
-
-
-        if(developer != null) throw new DMakerException(DMakerErrorCode.NO_DEVELOPER);
 
         RetiredDeveloper retiredDeveloper = RetiredDeveloper.builder()
                 .memberId(memberId)
