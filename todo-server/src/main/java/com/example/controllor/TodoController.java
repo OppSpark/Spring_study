@@ -1,6 +1,5 @@
 package com.example.controllor;
 
-
 import com.example.model.TodoEntity;
 import com.example.model.TodoRequest;
 import com.example.model.TodoResponse;
@@ -64,6 +63,7 @@ public class TodoController {
         this.service.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
     @DeleteMapping
     public ResponseEntity<?> deleteAll(){
         System.out.println("DELETE ALL");

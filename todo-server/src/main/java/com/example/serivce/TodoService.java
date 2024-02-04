@@ -3,12 +3,10 @@ package com.example.serivce;
 import com.example.model.TodoEntity;
 import com.example.model.TodoRequest;
 import com.example.repository.TodoRepository;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @Service
@@ -30,8 +28,6 @@ public class TodoService {
         return this.todoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
-
 
     public List<TodoEntity> searchAll(){
         return this.todoRepository.findAll();

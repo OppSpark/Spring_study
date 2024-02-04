@@ -2,9 +2,7 @@ package com.example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.security.PrivateKey;
+import lombok.NoArgsConstructor;;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +24,5 @@ public class TodoResponse {
         this.order = todoEntity.getOrder();
         this.completed = todoEntity.getCompleted();
         this.url = "http://localhost:8080/" + this.id;
-
     }
 }
