@@ -22,5 +22,4 @@ public class DeveloperDto {
                 .memberId(developer.getMemberId())
                 .build();
     }
-
 }

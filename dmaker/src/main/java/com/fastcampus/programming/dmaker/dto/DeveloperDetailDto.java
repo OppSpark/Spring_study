@@ -7,8 +7,9 @@ import com.fastcampus.programming.dmaker.type.DeveloperSkillType;
 import lombok.*;
 
 /**
- *
+ * @author oppspark
  */
+
 @Getter
 @Setter
 @AllArgsConstructor

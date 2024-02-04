@@ -17,7 +17,6 @@ public class DMakerException extends RuntimeException {
         this.detailMessage = errorCode.getMessage();
     }
 
-    //디테일 메시지와 에러코드가 같이 담겨 있을 때
     public DMakerException(DMakerErrorCode errorCode, String detailMessage) {
         super(detailMessage);
         this.dMakerErrorCode = errorCode;

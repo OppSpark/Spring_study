@@ -1,7 +1,5 @@
 package com.fastcampus.programming.dmaker.entity;
 
-import com.fastcampus.programming.dmaker.type.DeveloperLevel;
-import com.fastcampus.programming.dmaker.type.DeveloperSkillType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

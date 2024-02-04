@@ -46,5 +46,4 @@ public class Developer {
 
     @LastModifiedDate
     private LocalDateTime updateAt;
-
 }
